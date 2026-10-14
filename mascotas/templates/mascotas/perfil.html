@@ -1,0 +1,26 @@
+{% extends 'mascotas/base.html' %}
+{% block content %}
+    <h2>Mi Perfil de Usuario</h2>
+    <p><strong>Nombre de usuario:</strong> {{ user.username }}</p>
+    <p><strong>Correo electrónico:</strong> {{ user.email|default:"No registrado" }}</p>
+
+    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+    <h3>Mascotas que has solicitado adoptar:</h3>
+    <div class="grid">
+        {% for m in mascotas_adoptadas %}
+            <div class="card">
+                {% if m.imagen_url %}
+                    <img src="{{ m.imagen_url }}" alt="{{ m.nombre }}">
+                {% endif %}
+                <div class="card-body">
+                    <h3>{{ m.nombre|title }}</h3>
+                    <p><strong>Especie:</strong> {{ m.especie }}</p>
+                    <p><strong>Estado:</strong> Solicitud Pendiente</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>Aún no tienes solicitudes de adopción registradas.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

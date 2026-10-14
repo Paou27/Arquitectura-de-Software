@@ -1,0 +1,27 @@
+{% extends 'mascotas/base.html' %}
+{% block content %}
+    <h2>Mascotas Disponibles para Adopción</h2>
+    <div class="grid">
+        {% for m in mascotas %}
+            <div class="card">
+                {% if m.imagen_url %}
+                    <img src="{{ m.imagen_url }}" alt="{{ m.nombre }}">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300" alt="default">
+                {% endif %}
+                <div class="card-body">
+                    <h3>{{ m.nombre|title }}</h3>
+                    <p><strong>Especie:</strong> {{ m.especie }}</p>
+                    <p><strong>Raza:</strong> {{ m.raza|default:"No especificada" }}</p>
+                    <p><strong>Descripción:</strong> {{ m.descripcion|default:"Sin descripción" }}</p>
+                    <span class="badge">{{ m.estado }}</span>
+                </div>
+                <div>
+                    <a href="{% url 'mascotas:adoptar' m.id %}" class="btn">¡Adoptar!</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay mascotas registradas todavía en el sistema.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'mascotas/base.html' %}
+{% block content %}
+    <h2>Reportar Nuevo Rescate de Mascota</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Nombre de la mascota:</label>
+        <input type="text" name="nombre" required>
+        <label>Especie (Ej. Perro, Gato):</label>
+        <input type="text" name="especie" required>
+        <label>Raza:</label>
+        <input type="text" name="raza">
+        <label>Edad estimada (años):</label>
+        <input type="number" name="edad_estimada">
+        <label>Descripción / Historia del rescate:</label>
+        <textarea name="descripcion" rows="4"></textarea>
+        <button type="submit" class="btn">Guardar Rescate</button>
+    </form>
+{% endblock %}
